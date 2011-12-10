@@ -1,7 +1,7 @@
 #include "testApp.h"
 
 void testApp::setup() {
-    ofBackground(255, 0, 0);
+    ofBackground(255, 255, 0);
     ofSetFrameRate(60);
 }
 
