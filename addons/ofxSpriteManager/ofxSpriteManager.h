@@ -4,14 +4,15 @@
 #include "ofxExtras.h"
 #include "ofxSprite.h"
 
-class ofxSpriteManager : public vector<ofxSprite> {
+class ofxSpriteManager : public vector<ofxSprite*> {
 public:
 
-    ofxSprite& loadSprite(string filename, int numFrames=1, int start=0, string id="");
-    
-    ofxSprite& operator[](string id);
-    ofxSprite& operator[](int i) { return at(i); }; 
-    
+    //methods
     void update();
-    
+    void add(ofxSprite& sprite);
+             
+    //operators
+    ofxSprite& operator[](string id);
+    ofxSprite& operator[](int i) { return *at(i); }; 
+
 };

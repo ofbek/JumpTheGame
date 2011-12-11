@@ -7,8 +7,12 @@ class ofxSprite : public ofNode {
 public:
     
     ofxSprite();
+    void load(string filename, int numFrames=1, int start=0, string id="");
     
     void customDraw();
+
+    void draw(float x, float y);
+    void draw();
     
     void setAnchorPercent(float xPct, float yPct);
     void setFrameRate(int frameRate);
@@ -20,6 +24,7 @@ public:
     void setLoop(bool loop);
     void nextFrame();
     void previousFrame();
+    void center();
     
     void play();
     void pause();
@@ -30,6 +35,8 @@ public:
     int getTotalFrames();
     int getCurrentFrame();
     bool getIsPlaying();
+    float getWidth();
+    float getHeight();
 
     ofImage& getImageAtFrame(int frame);
     ofImage& getCurrentImage();

@@ -8,6 +8,21 @@ ofxSprite::ofxSprite() {
     pos = 0;
     loop = true;
     visible = true;
+    frameRate = 20;
+}
+
+void ofxSprite::load(string filename, int numFrames, int start, string id) {
+    this->id = id;
+    
+    for (int i=start; i<numFrames+start; i++) {
+        addFile(ofVAArgsToString(filename.c_str(), i));
+    }
+}
+
+void ofxSprite::addFile(string filename) {
+    filenames.push_back(filename);
+    assets.add(filename);
+    totalFrames = filenames.size();
 }
 
 void ofxSprite::setFrameRate(int frameRate) {
@@ -18,11 +33,6 @@ void ofxSprite::setSpeed(float speed) {
     this->speed = speed;
 }
 
-void ofxSprite::addFile(string filename) {
-    filenames.push_back(filename);
-    assets.add(filename);
-    totalFrames = filenames.size();
-}
 
 int ofxSprite::getTotalFrames() {
     return totalFrames;
@@ -62,7 +72,11 @@ void ofxSprite::nextFrame() {
 }
 
 void ofxSprite::setAnchorPercent(float xPct, float yPct) {
-    anchorPoint.set(xPct*getImageAtFrame(0).getWidth(),yPct*getImageAtFrame(0).getHeight());
+    anchorPoint.set(xPct*getWidth(),yPct*getHeight());
+}
+
+void ofxSprite::center() {
+    setAnchorPercent(.5,.5);
 }
 
 void ofxSprite::setPosition(float x, float y) {
@@ -88,9 +102,25 @@ bool ofxSprite::getIsPlaying() {
     return isPlaying;
 }
 
+float ofxSprite::getWidth() {
+    return getCurrentImage().getWidth();
+}
+
+float ofxSprite::getHeight() {
+    return getCurrentImage().getHeight();
+}
+
 void ofxSprite::customDraw() {
     if (!visible) return;
-    getImageAtFrame(getCurrentFrame()).draw(-anchorPoint);
+    getCurrentImage().draw(-anchorPoint);
+}
+
+void ofxSprite::draw() {
+    ofNode::draw();
+}
+
+void ofxSprite::draw(float x, float y) {
+    getCurrentImage().draw(ofPoint(x,y)-anchorPoint);
 }
 
 ofImage& ofxSprite::getImageAtFrame(int frame) {
