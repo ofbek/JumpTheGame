@@ -23,7 +23,7 @@ void testApp::setup(){
 	bool record = false;
 	ni.disableSkeleton();
 	ni.disableDepth();	
-	if(!record) {
+	if(record) {
 		ni.initWithXML();
 		//ni.startRecordingWhenUserIsDetected();
 	}
@@ -37,6 +37,11 @@ void testApp::setup(){
 	ding.resize(s,s);
 	ding.setAnchorPercent(0.5,0.5);
 	release_on = ofGetElapsedTimeMillis() + ofRandom(300,1000);
+    
+    int w = 640;
+	int h = 480;
+    rgb = new unsigned char[w*h*3];
+	rgba = new unsigned char[w*h*4];
 }
 
 //--------------------------------------------------------------
@@ -84,8 +89,8 @@ void testApp::draw(){
 	ofImage img;
 	int w = 640;
 	int h = 480;
-	unsigned char* rgb = new unsigned char[w*h*3];
-	unsigned char* rgba = new unsigned char[w*h*4];
+	//unsigned char* rgb = new unsigned char[w*h*3];
+	//unsigned char* rgba = new unsigned char[w*h*4];
 	ni.getAllMergedUserPixels(rgb, rgba);
 	if(vid.process(rgb, w,h)) {
 		vector<ofPoint>& pts = vid.getContour();
@@ -105,8 +110,8 @@ void testApp::draw(){
 	img.update();
 	img.draw(0,0);
 	
-	delete[] rgb;
-	delete[] rgba;
+//	delete[] rgb;
+//	delete[] rgba;
 	
 	if(ofGetFrameNum()%300 == 0) {
 		ofSaveFrame();

@@ -261,4 +261,7 @@ int ofxImageSequence::imageTypeToGLType(int imageType)
 			ofLog(OF_LOG_ERROR, "ofxImageSequence - unsupported image type for image");
 			break;
 	}
+    
+    return 0; //fix by rick (-Wreturn-type
+    
 }

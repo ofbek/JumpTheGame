@@ -3,42 +3,54 @@
 //--------------------------------------------------------------
 void testApp::setup() {
     ofEnableAlphaBlending();
+    ofSetFrameRate(60);
     ofBackground(0);
     
-    explosie.loadSequence("explosie/", "png", 1, 14, 2);
-	explosie.preloadAllFrames();
-	explosie.setFrameRate(10);
-
-    jet.loadSequence("jet/", "png", 1, 3, 2);
-	jet.preloadAllFrames();
-	jet.setFrameRate(10);
-    
     sound.loadSound("sound/explosion.wav");
+    
+    ofxSprite &bg = sprites.loadSprite("bg/bg_%02d.png",5,1,"bg");
+    bg.setFrameRate(3);
+    bg.play();
+    bg.visible = false;
+    
+    bgScrollValue = 0;
+    
+    ofxSprite &sprite = sprites.loadSprite("explosie/%02d.png",5,1);
+    sprite.setPosition(ofGetWidth()/2, ofGetHeight()/2);
+    sprite.setAnchorPercent(.5,.5);
+    sprite.setFrameRate(10);
+    sprite.setScale(.5);
+    sprite.setLoop(false);
+    sprite.play();
+    
 }
 
 //--------------------------------------------------------------
 void testApp::draw() {
+    sprites.update();
     
-    float explosieX = ofGetWidth()/2;
-    float explosieY = 100;
+    ofImage &bgImage = sprites["bg"].getCurrentImage();
+
+    bgScrollValue++;
     
-    drawSprite(explosie, explosieX, explosieY, .5);
+    ofPushMatrix();
+    ofTranslate(0,-bgScrollValue);
+    bgImage.draw(0,0);
+    bgImage.draw(0,bgImage.getHeight());
+    ofPopMatrix();
     
-    float jetX = sin(ofGetElapsedTimef())*ofGetWidth()/2+ofGetWidth()/2;
-    float jetY = mouseY;
     
-    drawSprite(jet, jetX, jetY, .5);
+
+    for (int i=0; i<sprites.size(); i++) {
+        //if (!sprites[i].getIsPlaying()) sprites[i].visible = false;
+        sprites[i].draw();
+    }
 }
 
 void testApp::mousePressed(int x, int y, int button) {
     sound.play();
-}
-
-void testApp::drawSprite(ofxImageSequence &mov, float x, float y, float scale) {
-    ofPushMatrix();
-    ofTranslate(x,y);
-    ofScale(scale, scale);
-    ofTexture &tex = *mov.getFrameForTime(ofGetElapsedTimef());
-    tex.draw(-tex.getWidth()/2, -tex.getHeight()/2);
-    ofPopMatrix();   
+    
+    sprites.push_back(sprites.back());
+    sprites.back().setPosition(mouseX,mouseY);
+    sprites.back().play();
 }
