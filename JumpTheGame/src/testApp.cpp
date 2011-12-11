@@ -20,8 +20,7 @@ void testApp::setup() {
     videoScale = ini.get("video.cale",1.5f);
     showVideoOutline = ini.get("showVideoOutline",false);
     videoPosition = ini.get("video.position",ofPoint());
-    
-    
+        
     w = 640;
 	h = 480;
     
