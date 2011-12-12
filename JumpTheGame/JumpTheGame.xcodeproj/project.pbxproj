@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1D01348E1494F447003741F6 /* ofxIniSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D01348B1494F447003741F6 /* ofxIniSettings.cpp */; };
+		1D2FD76A14969FCB0084C75C /* Mouse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD76914969FCB0084C75C /* Mouse.cpp */; };
+		1D2FD76C1496A0AB0084C75C /* Debug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD76B1496A0AB0084C75C /* Debug.cpp */; };
+		1D2FD76E1496A0E90084C75C /* HitTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD76D1496A0E90084C75C /* HitTest.cpp */; };
+		1D2FD7701496A1610084C75C /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD76F1496A1600084C75C /* Settings.cpp */; };
+		1D2FD7721496A1A60084C75C /* Images.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD7711496A1A60084C75C /* Images.cpp */; };
+		1D2FD7741496A24C0084C75C /* Video.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD7731496A24C0084C75C /* Video.cpp */; };
+		1D2FD7761496A4AE0084C75C /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD7751496A4AD0084C75C /* Window.cpp */; };
+		1D2FD7781496A6E70084C75C /* Score.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD7771496A6E70084C75C /* Score.cpp */; };
+		1D2FD77A1496A89A0084C75C /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D2FD7791496A8990084C75C /* Sound.cpp */; };
 		1D439BB91494DA4600775F97 /* ofxDepthGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D439B9E1494DA4600775F97 /* ofxDepthGenerator.cpp */; };
 		1D439BBA1494DA4600775F97 /* ofxGestureGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D439BA01494DA4600775F97 /* ofxGestureGenerator.cpp */; };
 		1D439BBB1494DA4600775F97 /* ofxHandGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D439BA21494DA4600775F97 /* ofxHandGenerator.cpp */; };
@@ -146,6 +155,15 @@
 		1D01348B1494F447003741F6 /* ofxIniSettings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxIniSettings.cpp; sourceTree = "<group>"; };
 		1D01348C1494F447003741F6 /* ofxIniSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxIniSettings.h; sourceTree = "<group>"; };
 		1D01348D1494F447003741F6 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		1D2FD76914969FCB0084C75C /* Mouse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Mouse.cpp; sourceTree = "<group>"; };
+		1D2FD76B1496A0AB0084C75C /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		1D2FD76D1496A0E90084C75C /* HitTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HitTest.cpp; sourceTree = "<group>"; };
+		1D2FD76F1496A1600084C75C /* Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Settings.cpp; sourceTree = "<group>"; };
+		1D2FD7711496A1A60084C75C /* Images.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Images.cpp; sourceTree = "<group>"; };
+		1D2FD7731496A24C0084C75C /* Video.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Video.cpp; sourceTree = "<group>"; };
+		1D2FD7751496A4AD0084C75C /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		1D2FD7771496A6E70084C75C /* Score.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Score.cpp; sourceTree = "<group>"; };
+		1D2FD7791496A8990084C75C /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
 		1D439B9E1494DA4600775F97 /* ofxDepthGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxDepthGenerator.cpp; sourceTree = "<group>"; };
 		1D439B9F1494DA4600775F97 /* ofxDepthGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxDepthGenerator.h; sourceTree = "<group>"; };
 		1D439BA01494DA4600775F97 /* ofxGestureGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxGestureGenerator.cpp; sourceTree = "<group>"; };
@@ -581,6 +599,15 @@
 			);
 			name = ofxIniSettings;
 			path = ../addons/ofxIniSettings;
+			sourceTree = "<group>";
+		};
+		1D2FD767149688EB0084C75C /* states */ = {
+			isa = PBXGroup;
+			children = (
+				1D90DD3414966AC100249CF3 /* WaitForStart.cpp */,
+				1D90DD3614966AFA00249CF3 /* Playing.cpp */,
+			);
+			name = states;
 			sourceTree = "<group>";
 		};
 		1D439A991494D92A00775F97 /* ofxOpenNI */ = {
@@ -1390,13 +1417,21 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				1D2FD767149688EB0084C75C /* states */,
 				1D439C691494DBCE00775F97 /* VideoProcessing.cpp */,
 				1D439C6A1494DBCE00775F97 /* VideoProcessing.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
-				1D90DD3414966AC100249CF3 /* WaitForStart.cpp */,
-				1D90DD3614966AFA00249CF3 /* Playing.cpp */,
+				1D2FD7751496A4AD0084C75C /* Window.cpp */,
+				1D2FD76914969FCB0084C75C /* Mouse.cpp */,
+				1D2FD76B1496A0AB0084C75C /* Debug.cpp */,
+				1D2FD76D1496A0E90084C75C /* HitTest.cpp */,
+				1D2FD76F1496A1600084C75C /* Settings.cpp */,
+				1D2FD7711496A1A60084C75C /* Images.cpp */,
+				1D2FD7791496A8990084C75C /* Sound.cpp */,
+				1D2FD7771496A6E70084C75C /* Score.cpp */,
+				1D2FD7731496A24C0084C75C /* Video.cpp */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1572,6 +1607,15 @@
 				1D90DDA81496764600249CF3 /* ofxCvHaarFinder.cpp in Sources */,
 				1D90DDA91496764600249CF3 /* ofxCvImage.cpp in Sources */,
 				1D90DDAA1496764600249CF3 /* ofxCvShortImage.cpp in Sources */,
+				1D2FD76A14969FCB0084C75C /* Mouse.cpp in Sources */,
+				1D2FD76C1496A0AB0084C75C /* Debug.cpp in Sources */,
+				1D2FD76E1496A0E90084C75C /* HitTest.cpp in Sources */,
+				1D2FD7701496A1610084C75C /* Settings.cpp in Sources */,
+				1D2FD7721496A1A60084C75C /* Images.cpp in Sources */,
+				1D2FD7741496A24C0084C75C /* Video.cpp in Sources */,
+				1D2FD7761496A4AE0084C75C /* Window.cpp in Sources */,
+				1D2FD7781496A6E70084C75C /* Score.cpp in Sources */,
+				1D2FD77A1496A89A0084C75C /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

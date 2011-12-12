@@ -7,72 +7,109 @@
 #include "ofxSpriteManager.h"
 #include "ofxIniSettings.h"
 
-class testApp : public ofBaseApp{
+class testApp : public ofBaseApp {
 public:
+        
+    //load
+    void loadSettings();
+    void loadImages();
+    void loadSounds();
     
-    enum State { 
-        WAIT_FOR_START, 
-        INIT_PLAY,
-        PLAYING, 
-        GAME_OVER 
-    } state;
-    
-    void update();
-    void keyPressed(int key);
-    void mousePressed(int x, int y, int button);
-    void mouseMoved(int x, int y);
-    void windowResized(int x, int y);
-
+    //setup
     void setup();
+    void setupBox2D();
+    void setupVideo();
     void setupWindow();
     void setupWaitForStart();
     void setupPlay();
     
+    //draw
     void draw();
     void drawUserOutline();
     void drawBackground();
     void drawVideo();
     void drawWaitForStart();
     void drawPlaying();
-    void drawDebugInfo();
+    void drawDebug();
     void drawBorders();
+    void drawWarpCorners();
+    void drawScore();
     
-    void createCircle(int x, int y);    
-	void contactStart(ofxBox2dContactArgs &e);
+    //update
+    void update();
+
+	//hitTest
+    void contactStart(ofxBox2dContactArgs &e);
 	void contactEnd(ofxBox2dContactArgs &e);
-    void rotateScene(bool bRotate);
-    void setState(State state);
-        
-    ofPoint getMouse();
+    void hitGood();
+    void hitBad();
+    void hitStart();
+    
+    //mouse & keyboard
+    void keyPressed(int key);
+    void mousePressed(int x, int y, int button);
+    void mouseReleased(int x, int y, int button);
+    void mouseDragged(int x, int y, int button);
+    void mouseMoved(int x, int y);
+    
+    //mouse corrected for rotation
+    ofPoint getMouse(); 
+    
+    //window
+    void windowResized(int x, int y);
+    
+    //game logic
+    enum State { WAIT_FOR_START, INIT_PLAY, PLAYING, GAME_OVER };
+    State currentState;
+    State nextState;
+    void updateState();
+    void setupScore();
+    void updateScore();
+    
+    //objects
     ofxSimpleOpenNI ni;
     VideoProcessing vid;
+    ofImage imgVideo;
     ofxBox2d box;
     ofxBox2dPolygon boxUser;
     ofxBox2dRect boxStart;
     ofxBox2dCircle boxJet;
     ofxBox2dCircle boxDiamond;
     ofxIniSettings ini;
-    ofImage imgVideo;
     ofPolyline polyline;
-    ofxSprite bg,explosion,jet,moonbg,moonfg,start,diamond,donut,kleurexplosie;
+    ofxSprite bg,explosion,jet,moonbg,moonfg,start;
+    ofxSprite diamond,donut,kleurexplosie,infographic;
+    ofxSprite cijfers;
     ofxSpriteManager sprites;
-    ofSoundPlayer sound;
+    ofxSoundAssets sounds;
     ofPoint videoPosition;
     ofPoint startButtonPosition;
     ofPoint center;
-    
+    ofFbo fbo;
+    ofPoint corners[4];
+    ofPoint *currentCorner;
+    ofRectangle timeBarRect;
+    ofPoint gameOverPosition;
+
+    //variables
     float bgScrollPos;
     float bgScrollSpeed;
-    bool isSceneRotated;
     float aspectRatio;
     bool showBorders;
     bool showUserOutline;
     bool showVideoOutline;
     bool showRawVideo;
     float videoScale;
-    float windowScale;
-    float scaledWidth;
-    float scaledHeight;
+    bool showWarpCorners;
+    bool showDebug;
+    float score, beginScore;
+    float timeLeft,beginTimeLeft;
+    int timeBarColorFront;
+    int timeBarColorBack;
+    float hitMinusPoints;
+    float scorePoints;
+    float timePerPoint;
+    float gameOverVisbibleTime;
     
     //kinect resolution
     static const int w = 640;
