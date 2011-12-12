@@ -30,4 +30,10 @@ void testApp::loadSettings() {
     gameOverVisbibleTime = ini.get("gameOverVisbibleTime",15);
     timePerPoint = ini.get("timePerPoint",5);
     scorePoints = ini.get("scorePoints",10);
+    
+    //box2d
+    box.init();
+    box.setGravity(0,ini.get("box2d.gravity",20)); 
+    box.setFPS(ini.get("box2d.frameRate",30));
+
 }

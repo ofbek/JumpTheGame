@@ -4,12 +4,12 @@
 void testApp::setup() {
     bgScrollPos = 0;
     currentCorner = 0;
-    
+        
     loadSettings();
     loadImages();
     loadSounds();
     
-    setupBox2D();
+    setupHitTest();
     setupVideo();
     setupScore();
     

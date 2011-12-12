@@ -1,10 +1,6 @@
 #include "testApp.h"
 
-void testApp::setupBox2D() {
-    box.init();
-    box.setGravity(0,25); 
-    box.setFPS(30.0);
-
+void testApp::setupHitTest() {
     ofAddListener(box.contactStartEvents, this, &testApp::contactStart);
     ofAddListener(box.contactEndEvents, this, &testApp::contactEnd);
 }

@@ -17,7 +17,7 @@ public:
     
     //setup
     void setup();
-    void setupBox2D();
+    void setupHitTest();
     void setupVideo();
     void setupWindow();
     void setupWaitForStart();
