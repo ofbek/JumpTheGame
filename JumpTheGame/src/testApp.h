@@ -29,13 +29,13 @@ public:
     void setupPlay();
     
     void draw();
-    void drawCircles();
-    void drawPolyLine();
+    void drawUserOutline();
     void drawBackground();
     void drawVideo();
-    void drawDebugInfo();
     void drawWaitForStart();
     void drawPlaying();
+    void drawDebugInfo();
+    void drawBorders();
     
     void createCircle(int x, int y);    
 	void contactStart(ofxBox2dContactArgs &e);
@@ -55,21 +55,21 @@ public:
     ofImage imgVideo;
     ofPolyline polyline;
     ofxSprite bg,explosion,jet,moonbg,moonfg,start,diamond,donut,kleurexplosie;
-    vector<ofxBox2dCircle*> circles;
     ofxSpriteManager sprites;
     ofSoundPlayer sound;
+    ofPoint videoPosition;
+    ofPoint startButtonPosition;
+    ofPoint center;
     
     float bgScrollPos;
     float bgScrollSpeed;
     bool isSceneRotated;
     float aspectRatio;
     bool showBorders;
+    bool showUserOutline;
     bool showVideoOutline;
     bool showRawVideo;
     float videoScale;
-    ofPoint videoPosition;
-    ofPoint startButtonPosition;
-    ofPoint center;
     float windowScale;
     float scaledWidth;
     float scaledHeight;

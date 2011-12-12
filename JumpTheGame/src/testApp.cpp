@@ -14,6 +14,7 @@ void testApp::setup() {
     
     rotateScene(ini.get("isSceneRotated",false));
     showBorders = ini.get("showBorders",false);
+    showUserOutline = ini.get("showUserOutline",true);
     showRawVideo = ini.get("showRawVideo",false);
     bgScrollSpeed = ini.get("bgScrollSpeed",-10);
     videoScale = ini.get("video.scale",1.5f);
@@ -75,6 +76,8 @@ void testApp::setup() {
     
     explosion.play();
     explosion.center();
+    explosion.setLoop(false);
+    
     jet.center();
     
     start.center();
@@ -97,22 +100,6 @@ void testApp::setState(State newState) {
         case GAME_OVER: break;       
         default: break;
     }    
-}
-
-void testApp::setupWaitForStart() {
-    //
-}
-
-void testApp::setupPlay() {
-    boxJet.setPhysics(1, .5, 2);        
-    boxJet.setup(box.getWorld(),100,100,40);
-    boxJet.setData(&jet);
-    boxDiamond.setData(&diamond);
-    diamond.setScale(1);
-    diamond.center();
-    boxDiamond.setPhysics(1, .5, 2);        
-    boxDiamond.setup(box.getWorld(),100,100,50);
-    setState(PLAYING);
 }
 
 //--------------------------------------------------------------
@@ -142,13 +129,37 @@ void testApp::draw() {
         case WAIT_FOR_START: drawWaitForStart(); break;
         case PLAYING: drawPlaying(); break;        
         default: break;
-    }    
+    }
     
     ofSetColor(255);
     moonfg.draw(0,height-moonfg.getHeight());
-    
-    //boxJet.draw();
-    
+        
+    drawBorders();
+    drawDebugInfo();
+}
+
+void testApp::drawUserOutline() {
+    ofPushMatrix();
+    ofSetColor(255);
+    ofSetLineWidth(3);   
+    polyline.draw();
+    ofPopMatrix();
+}
+
+void testApp::drawDebugInfo() {
+    if (!isSceneRotated) {
+        float x=0;
+        float y=15;
+        ofSetupScreen();
+        ofSetColor(255,255,0); 
+        ofDrawBitmapString("state: " + ofToString(state), x, y+=15);
+        ofDrawBitmapString("videoScale: " + ofToString(videoScale), x, y+=15);
+        ofDrawBitmapString("start button pos: " + ofToString(start.getPosition()), x, y+=15);
+        ofDrawBitmapString("start button size: " + ofToString(start.getSize()), x, y+=15);
+    }
+}
+
+void testApp::drawBorders() {
     if (showBorders) {
         //border
         ofNoFill();
@@ -163,58 +174,6 @@ void testApp::draw() {
         //center
         ofSetColor(0,255,0);
         ofCircle(center,5);
-    }
-    
-    //draw all box2d opbjects
-    //box.draw();
-    
-    drawDebugInfo();
-}
-
-void testApp::drawPlaying() {
-    explosion.draw(getMouse().x,getMouse().y);
-    
-    ofNoFill();
-    ofSetColor(255);
-    //boxDiamond.setPosition(getMouse().x, getMouse().y);
-    
-    if (boxDiamond.getPosition().y > height) {
-        boxDiamond.setPosition(ofRandom(0,width), ofRandom(-100,0));
-        boxDiamond.setVelocity(0,0);
-    }
-    
-    diamond.setPosition(boxDiamond.getPosition());
-    boxDiamond.draw();
-    ofSetColor(255);
-    diamond.draw();
-    
-    boxJet.addAttractionPoint(getMouse(), 10);
-    jet.setPosition(boxJet.getPosition());
-    jet.setRotation(ofxGetHeading2D(boxJet.getVelocity()));
-    jet.draw();
-    
-    drawCircles();
-    drawPolyLine();
-}
-
-void testApp::drawWaitForStart() {
-    start.draw(center + videoPosition + startButtonPosition);
-    
-    //boxStart.setPosition(start.getPosition());
-    ofSetColor(0, 0, 255);
-    boxStart.draw();
-}
-
-void testApp::drawDebugInfo() {
-    if (!isSceneRotated) {
-        float x=0;
-        float y=100;
-        ofSetupScreen();
-        ofSetColor(255,255,0); 
-        ofDrawBitmapString("state: " + ofToString(state), x, y+=15);
-        ofDrawBitmapString("videoScale: " + ofToString(videoScale), x, y+=15);
-        ofDrawBitmapString("start button pos: " + ofToString(start.getPosition()), x, y+=15);
-        ofDrawBitmapString("start button size: " + ofToString(start.getSize()), x, y+=15);
     }
 }
 
@@ -237,33 +196,6 @@ ofPoint testApp::getMouse() {
         mouse.y = ofMap(ofGetMouseY(), 0, ofGetHeight(), 0, height, false);
     }
     return mouse;
-}
-
-void testApp::createCircle(int x, int y) {
-    ofxBox2dCircle* circle = new ofxBox2dCircle();
-    circle->setPhysics(1, .75, 0.25);
-    circle->setup(box.getWorld(), x, y, 37.5);
-    circles.push_back(circle);			    
-}
-
-void testApp::drawCircles() {
-    for (int i=0; i<circles.size(); i++) {
-        ofPushMatrix();
-        ofSetColor(255);
-        ofNoFill();
-        ofTranslate(circles[i]->getPosition());
-        ofRotate(circles[i]->getRotation());
-        ofCircle(0,0,circles[i]->getRadius());
-        ofPopMatrix();
-    }
-}
-
-void testApp::drawPolyLine() {
-    ofPushMatrix();
-    ofSetColor(255);
-    ofSetLineWidth(3);   
-    polyline.draw();
-    ofPopMatrix();
 }
 
 void testApp::drawBackground() {
@@ -342,19 +274,15 @@ void testApp::keyPressed(int key){
     if (key == 'b') showBorders = !showBorders;
     if (key == 'f') ofToggleFullscreen();
     if (key == 'i') showRawVideo = !showRawVideo;
-    
     if (key == 'v') videoScale*=1.025;
     if (key == 'V') videoScale/=1.025;
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button) {
-    ofPoint mouse = getMouse();
-    createCircle(mouse.x, mouse.y);
     sound.play();
     
     if (state==WAIT_FOR_START) setState(INIT_PLAY);
-    
 }
 
 void testApp::mouseMoved(int x, int y) {
@@ -383,6 +311,8 @@ void testApp::windowResized(int w, int h) {
 
 //--------------------------------------------------------------
 void testApp::contactStart(ofxBox2dContactArgs &e) {
+    ofBackground(255,0,255);
+    
     if(e.a != NULL && e.b != NULL) { 
         
         if (e.a->GetType() == b2Shape::e_polygon || e.b->GetType() == b2Shape::e_polygon) {
@@ -390,12 +320,31 @@ void testApp::contactStart(ofxBox2dContactArgs &e) {
             ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
             ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
             
+            if (a==&start || b==&start) {
+                
+                if (state==WAIT_FOR_START) {
+                    ofBackground(255,255,0); 
+                    
+//                    if (state==WAIT_FOR_START) {
+//                        setState(INIT_PLAY);
+//                    }
+                }
+                
+            }
+            
             if (a==&jet || b==&jet) {
+                explosion.setPosition(jet.getPosition());
+                explosion.play();
+                sound.play();
+                
                 ofBackground(255, 0, 0);
             }
             
             if (a==&diamond || b==&diamond) { 
-                cout << "SCORE!!!" << endl;
+                explosion.setPosition(diamond.getPosition());
+                explosion.play();
+                sound.play();
+                
                 ofBackground(0, 255, 0);
             }
             
@@ -411,7 +360,7 @@ void testApp::contactEnd(ofxBox2dContactArgs &e) {
         //ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
         //ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
         
-        ofBackground(0);
+        //ofBackground(0);
         
     }
 }

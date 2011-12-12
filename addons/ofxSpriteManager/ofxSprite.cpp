@@ -92,9 +92,9 @@ void ofxSprite::setRotation(float rotation) {
 }
 
 void ofxSprite::play() {
+    pos = 0;
     visible = true;
     isPlaying = true;
-    cout << "play" << endl;
 }
 
 void ofxSprite::stop() {

@@ -10,7 +10,7 @@ public:
     //methods
     void update();
     void add(ofxSprite& sprite);
-             
+    
     //operators
     ofxSprite& operator[](string id);
     ofxSprite& operator[](int i) { return *at(i); }; 
