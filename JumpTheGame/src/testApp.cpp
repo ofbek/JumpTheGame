@@ -5,10 +5,10 @@ void testApp::setup() {
     ini.load("settings.ini");
     
     ofBackground(0);
-	ofSetFrameRate(ini.get("frameRate",60));
-	ofSetVerticalSync(true);
-	ofEnableAlphaBlending();
-	ofSetFullscreen(ini.get("fullscreen",false));
+    ofSetFrameRate(ini.get("frameRate",60));
+    ofSetVerticalSync(true);
+    ofEnableAlphaBlending();
+    ofSetFullscreen(ini.get("fullscreen",false));
     ofxSetCursor(ini.get("showCursor",false));
     ofxSetWindowRect(ini.get("window",ofRectangle(0,0,1280,768)));
     
@@ -22,21 +22,21 @@ void testApp::setup() {
     startButtonPosition = ini.get("start.position",ofPoint());
     
     // register the listener so that we get the events
-	ofAddListener(box.contactStartEvents, this, &testApp::contactStart);
-	ofAddListener(box.contactEndEvents, this, &testApp::contactEnd);
+    ofAddListener(box.contactStartEvents, this, &testApp::contactStart);
+    ofAddListener(box.contactEndEvents, this, &testApp::contactEnd);
     
     windowResized(ofGetScreenHeight(), ofGetScreenWidth());
     
     rgb = new unsigned char[w*h*3];
-	rgba = new unsigned char[w*h*4];
+    rgba = new unsigned char[w*h*4];
     
-	box.init();
-	box.setGravity(0,25); 
-	box.setFPS(30.0);
+    box.init();
+    box.setGravity(0,25); 
+    box.setFPS(30.0);
     
-	// setup openni
-	ni.disableSkeleton();
-	ni.disableDepth();	
+    // setup openni
+    ni.disableSkeleton();
+    ni.disableDepth();	
     
     if (ini.get("useKinect",true)) {
         ni.initWithXML();
@@ -119,8 +119,8 @@ void testApp::setupPlay() {
 void testApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
-	ni.update();    
-	box.update();
+    ni.update();    
+    box.update();
     sprites.update();
     
     ni.getAllMergedUserPixels(rgb, rgba);
@@ -288,7 +288,7 @@ void testApp::drawVideo() {
     ofTranslate(videoPosition); //offset for video
     
     ofSetColor(255);
-	imgVideo.setFromPixels(rgba, w, h, OF_IMAGE_COLOR_ALPHA);
+    imgVideo.setFromPixels(rgba, w, h, OF_IMAGE_COLOR_ALPHA);
     imgVideo.draw(0,0);
     
     if (showRawVideo) {
@@ -338,8 +338,8 @@ void testApp::rotateScene(bool bRotate) {
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-	if (key == 'r') rotateScene(!isSceneRotated);
-	if (key == 'b') showBorders = !showBorders;
+    if (key == 'r') rotateScene(!isSceneRotated);
+    if (key == 'b') showBorders = !showBorders;
     if (key == 'f') ofToggleFullscreen();
     if (key == 'i') showRawVideo = !showRawVideo;
     
@@ -383,7 +383,7 @@ void testApp::windowResized(int w, int h) {
 
 //--------------------------------------------------------------
 void testApp::contactStart(ofxBox2dContactArgs &e) {
-	if(e.a != NULL && e.b != NULL) { 
+    if(e.a != NULL && e.b != NULL) { 
         
         if (e.a->GetType() == b2Shape::e_polygon || e.b->GetType() == b2Shape::e_polygon) {
             
@@ -401,19 +401,19 @@ void testApp::contactStart(ofxBox2dContactArgs &e) {
             
         }
         
-	}
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::contactEnd(ofxBox2dContactArgs &e) {
-	if(e.a != NULL && e.b != NULL) { 
+    if(e.a != NULL && e.b != NULL) { 
         
         //ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
         //ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
         
         ofBackground(0);
         
-	}
+    }
 }
 
 
