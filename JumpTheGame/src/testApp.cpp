@@ -3,7 +3,7 @@
 //--------------------------------------------------------------
 void testApp::setup() {
     ini.load("settings.ini");
-
+    
     ofBackground(0);
 	ofSetFrameRate(ini.get("frameRate",60));
 	ofSetVerticalSync(true);
@@ -11,7 +11,7 @@ void testApp::setup() {
 	ofSetFullscreen(ini.get("fullscreen",false));
     ofxSetCursor(ini.get("showCursor",false));
     ofxSetWindowRect(ini.get("window",ofRectangle(0,0,1280,768)));
-          
+    
     rotateScene(ini.get("isSceneRotated",false));
     showBorders = ini.get("showBorders",false);
     showRawVideo = ini.get("showRawVideo",false);
@@ -29,11 +29,11 @@ void testApp::setup() {
     
     rgb = new unsigned char[w*h*3];
 	rgba = new unsigned char[w*h*4];
-    	    
+    
 	box.init();
 	box.setGravity(0,25); 
 	box.setFPS(30.0);
-   
+    
 	// setup openni
 	ni.disableSkeleton();
 	ni.disableDepth();	
@@ -52,7 +52,7 @@ void testApp::setup() {
     }
     
     sound.loadSound("sound/explosion.wav");
-
+    
     bg.load("bg/bg_%02d.png",5,1,"bg");
     explosion.load("explosie/%02d.png",5,1);
     jet.load("jet/%02d.png",3,1,"jet");
@@ -76,16 +76,16 @@ void testApp::setup() {
     explosion.play();
     explosion.center();
     jet.center();
-        
+    
     start.center();
     start.play();
     start.setFrameRate(5);
-
+    
     bg.setFrameRate(3);
     bg.play();
     
     bgScrollPos = 0;
-        
+    
     setState(WAIT_FOR_START);
 }
 
@@ -129,7 +129,7 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw() {
     setupWindow();
-
+    
     drawBackground();
     
     //draw moon & video
@@ -137,7 +137,7 @@ void testApp::draw() {
     moonbg.draw(0,height-moonbg.getHeight());
     drawVideo();
     ofSetColor(255);
-
+    
     switch (state) {
         case WAIT_FOR_START: drawWaitForStart(); break;
         case PLAYING: drawPlaying(); break;        
@@ -167,7 +167,7 @@ void testApp::draw() {
     
     //draw all box2d opbjects
     //box.draw();
-
+    
     drawDebugInfo();
 }
 
@@ -270,7 +270,7 @@ void testApp::drawBackground() {
     ofImage &bgImage = bg.getCurrentImage();
     
     bgScrollPos-=bgScrollSpeed;
-            
+    
     if (bgScrollPos<-bgImage.height) bgScrollPos=0;
     else if (bgScrollPos>0) bgScrollPos=-bgImage.height;
     
@@ -294,7 +294,7 @@ void testApp::drawVideo() {
     if (showRawVideo) {
         ni.drawImage();
     }
-
+    
     if (vid.process(rgb, w,h)) {
         polyline = vid.getContour();
         polyline.simplify(3);
@@ -367,24 +367,24 @@ void testApp::windowResized(int w, int h) {
     
     aspectRatio = (float)h/w;
     windowScale = isSceneRotated ? 1 : aspectRatio;
-
+    
     width = h;
     height = w;
-
+    
     center.set(width/2,height/2);
-            
+    
     scaledWidth = width * windowScale;
     scaledHeight = height * windowScale;
     
     //cout << "window resized: width:" << width << " height:" << height << endl;
-
+    
 }
 
 
 //--------------------------------------------------------------
 void testApp::contactStart(ofxBox2dContactArgs &e) {
 	if(e.a != NULL && e.b != NULL) { 
-                
+        
         if (e.a->GetType() == b2Shape::e_polygon || e.b->GetType() == b2Shape::e_polygon) {
             
             ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
@@ -400,19 +400,19 @@ void testApp::contactStart(ofxBox2dContactArgs &e) {
             }
             
         }
-                       
+        
 	}
 }
 
 //--------------------------------------------------------------
 void testApp::contactEnd(ofxBox2dContactArgs &e) {
 	if(e.a != NULL && e.b != NULL) { 
-
+        
         //ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
         //ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
         
         ofBackground(0);
-      
+        
 	}
 }
 
