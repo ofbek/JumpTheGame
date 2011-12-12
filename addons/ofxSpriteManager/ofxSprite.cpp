@@ -83,6 +83,14 @@ void ofxSprite::setPosition(float x, float y) {
     ofNode::setPosition(x,y,0);
 }
 
+void ofxSprite::setPosition(ofVec3f v) {
+    ofNode::setPosition(v);
+}
+
+void ofxSprite::setRotation(float rotation) {
+    setOrientation(ofVec3f(0,0,rotation));
+}
+
 void ofxSprite::play() {
     visible = true;
     isPlaying = true;
@@ -120,7 +128,12 @@ void ofxSprite::draw() {
 }
 
 void ofxSprite::draw(float x, float y) {
+    //or should this one call setPosition and then draw()?
     getCurrentImage().draw(ofPoint(x,y)-anchorPoint);
+}
+
+void ofxSprite::draw(ofVec2f v) {
+    draw(v.x,v.y);
 }
 
 ofImage& ofxSprite::getImageAtFrame(int frame) {
@@ -131,4 +144,12 @@ ofImage& ofxSprite::getImageAtFrame(int frame) {
 
 ofImage& ofxSprite::getCurrentImage() {
     return getImageAtFrame(getCurrentFrame());
+}
+
+ofRectangle ofxSprite::getBounds() {
+    return ofRectangle(getPosition().x, getPosition().y, getWidth(), getHeight());
+}
+
+ofVec2f ofxSprite::getSize() {
+    return ofPoint(getWidth(), getHeight());
 }

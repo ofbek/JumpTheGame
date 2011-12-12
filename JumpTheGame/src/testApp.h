@@ -9,33 +9,53 @@
 
 class testApp : public ofBaseApp{
 public:
-    void setup();
+    
+    enum State { 
+        WAIT_FOR_START, 
+        INIT_PLAY,
+        PLAYING, 
+        GAME_OVER 
+    } state;
+    
     void update();
-    void draw();
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
     void mouseMoved(int x, int y);
     void windowResized(int x, int y);
+
+    void setup();
+    void setupWindow();
+    void setupWaitForStart();
+    void setupPlay();
     
-    void createCircle(int x, int y);
+    void draw();
     void drawCircles();
+    void drawPolyLine();
     void drawBackground();
     void drawVideo();
+    void drawDebugInfo();
+    void drawWaitForStart();
+    void drawPlaying();
     
+    void createCircle(int x, int y);    
+	void contactStart(ofxBox2dContactArgs &e);
+	void contactEnd(ofxBox2dContactArgs &e);
     void rotateScene(bool bRotate);
-    
+    void setState(State state);
+        
+    ofPoint getMouse();
     ofxSimpleOpenNI ni;
     VideoProcessing vid;
     ofxBox2d box;
-    ofxBox2dPolygon poly;
+    ofxBox2dPolygon boxUser;
+    ofxBox2dRect boxStart;
+    ofxBox2dCircle boxJet;
+    ofxBox2dCircle boxDiamond;
     ofxIniSettings ini;
     ofImage imgVideo;
     ofPolyline polyline;
-        
-    ofxSprite bg,explosie,jet,moonbg,moonfg;
-
+    ofxSprite bg,explosion,jet,moonbg,moonfg,start,diamond,donut,kleurexplosie;
     vector<ofxBox2dCircle*> circles;
-            
     ofxSpriteManager sprites;
     ofSoundPlayer sound;
     
@@ -48,10 +68,19 @@ public:
     bool showRawVideo;
     float videoScale;
     ofPoint videoPosition;
+    ofPoint startButtonPosition;
+    ofPoint center;
+    float windowScale;
+    float scaledWidth;
+    float scaledHeight;
     
-    int width,height; //window width corrected for rotation
+    //kinect resolution
+    static const int w = 640;
+    static const int h = 480;
     
-    int w,h;
-    unsigned char* rgb;
-    unsigned char* rgba;
+    //window width corrected for rotation, but unscaled
+    int width,height; 
+    
+    unsigned char *rgb;
+    unsigned char *rgba;
 };

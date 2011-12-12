@@ -12,6 +12,7 @@ public:
     void customDraw();
 
     void draw(float x, float y);
+    void draw(ofVec2f v);
     void draw();
     
     void setAnchorPercent(float xPct, float yPct);
@@ -19,6 +20,8 @@ public:
     void setSpeed(float speed);
     void setProgress(float pct);
     void setPosition(float x, float y);
+    void setPosition(ofVec3f v);
+    void setRotation(float rotation);
     void addFile(string filename);
     void setCurrentFrame(float frame);
     void setLoop(bool loop);
@@ -40,6 +43,8 @@ public:
 
     ofImage& getImageAtFrame(int frame);
     ofImage& getCurrentImage();
+    ofRectangle getBounds();
+    ofVec2f getSize();
     
     string id;
     bool visible;
