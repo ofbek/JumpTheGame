@@ -25,6 +25,8 @@ void testApp::drawScore() {
     ofRect(timeBarRect);
     ofRectangle timeBarFrontRect = timeBarRect;
     timeBarFrontRect.width = ofMap(timeLeft,0,beginTimeLeft,0,timeBarRect.width);
-    ofSetHexColor(timeBarColorBack);
+    ofSetHexColor(timeBarColorFront);
     ofRect(timeBarFrontRect);
+    
+    ofSetColor(255);
 }

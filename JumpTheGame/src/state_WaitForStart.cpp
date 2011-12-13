@@ -2,7 +2,7 @@
 
 void testApp::setupWaitForStart() {
     boxStart.setPhysics(1, .5, 2);        
-    boxStart.setup(box.getWorld(), 0,0,100,30);
+    boxStart.setup(box.getWorld(), 0,1000,100,30);
     boxStart.setData(&start); //moet na setup
 }
 
@@ -14,7 +14,7 @@ void testApp::drawWaitForStart() {
     
     ofNoFill();
     ofSetColor(0,255,0);
-    //boxStart.draw();
+    boxStart.draw();
     
     drawUserOutline();
 }

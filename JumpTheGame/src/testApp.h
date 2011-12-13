@@ -100,7 +100,6 @@ public:
     bool showVideoOutline;
     bool showRawVideo;
     float videoScale;
-    bool showWarpCorners;
     bool showDebug;
     float score, beginScore;
     float timeLeft,beginTimeLeft;
@@ -110,6 +109,8 @@ public:
     float scorePoints;
     float timePerPoint;
     float gameOverVisbibleTime;
+    float maxScore;
+    bool soundEnabled;
     
     //kinect resolution
     static const int w = 640;

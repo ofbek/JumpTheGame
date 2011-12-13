@@ -45,8 +45,8 @@
 		1D439C671494DB8300775F97 /* libXnVHandGenerator_1_3_1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D439C581494DB8300775F97 /* libXnVHandGenerator_1_3_1.dylib */; };
 		1D439C681494DB8300775F97 /* libXnVNite_1_3_1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D439C591494DB8300775F97 /* libXnVNite_1_3_1.dylib */; };
 		1D439C6B1494DBCE00775F97 /* VideoProcessing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D439C691494DBCE00775F97 /* VideoProcessing.cpp */; };
-		1D90DD3514966AC100249CF3 /* WaitForStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD3414966AC100249CF3 /* WaitForStart.cpp */; };
-		1D90DD3714966AFA00249CF3 /* Playing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD3614966AFA00249CF3 /* Playing.cpp */; };
+		1D90DD3514966AC100249CF3 /* state_WaitForStart.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD3414966AC100249CF3 /* state_WaitForStart.cpp */; };
+		1D90DD3714966AFA00249CF3 /* state_Playing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD3614966AFA00249CF3 /* state_Playing.cpp */; };
 		1D90DDA31496764600249CF3 /* opencv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D90DD8F1496764600249CF3 /* opencv.a */; };
 		1D90DDA41496764600249CF3 /* ofxCvColorImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD921496764600249CF3 /* ofxCvColorImage.cpp */; };
 		1D90DDA51496764600249CF3 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1D90DD951496764600249CF3 /* ofxCvContourFinder.cpp */; };
@@ -332,8 +332,8 @@
 		1D439C5A1494DB8300775F97 /* XnVNite.net_1_3_1.dll */ = {isa = PBXFileReference; lastKnownFileType = file; path = XnVNite.net_1_3_1.dll; sourceTree = "<group>"; };
 		1D439C691494DBCE00775F97 /* VideoProcessing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VideoProcessing.cpp; sourceTree = "<group>"; };
 		1D439C6A1494DBCE00775F97 /* VideoProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoProcessing.h; sourceTree = "<group>"; };
-		1D90DD3414966AC100249CF3 /* WaitForStart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WaitForStart.cpp; sourceTree = "<group>"; };
-		1D90DD3614966AFA00249CF3 /* Playing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Playing.cpp; sourceTree = "<group>"; };
+		1D90DD3414966AC100249CF3 /* state_WaitForStart.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = state_WaitForStart.cpp; sourceTree = "<group>"; };
+		1D90DD3614966AFA00249CF3 /* state_Playing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = state_Playing.cpp; sourceTree = "<group>"; };
 		1D90DD391496764600249CF3 /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
 		1D90DD3E1496764600249CF3 /* cv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cv.h; sourceTree = "<group>"; };
 		1D90DD3F1496764600249CF3 /* cv.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cv.hpp; sourceTree = "<group>"; };
@@ -596,15 +596,6 @@
 			);
 			name = ofxIniSettings;
 			path = ../addons/ofxIniSettings;
-			sourceTree = "<group>";
-		};
-		1D2FD767149688EB0084C75C /* states */ = {
-			isa = PBXGroup;
-			children = (
-				1D90DD3414966AC100249CF3 /* WaitForStart.cpp */,
-				1D90DD3614966AFA00249CF3 /* Playing.cpp */,
-			);
-			name = states;
 			sourceTree = "<group>";
 		};
 		1D439A991494D92A00775F97 /* ofxOpenNI */ = {
@@ -1240,12 +1231,13 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				1D2FD767149688EB0084C75C /* states */,
 				1D439C691494DBCE00775F97 /* VideoProcessing.cpp */,
 				1D439C6A1494DBCE00775F97 /* VideoProcessing.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* testApp.h */,
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
+				1D90DD3414966AC100249CF3 /* state_WaitForStart.cpp */,
+				1D90DD3614966AFA00249CF3 /* state_Playing.cpp */,
 				1D2FD7751496A4AD0084C75C /* Window.cpp */,
 				1D2FD76914969FCB0084C75C /* Mouse.cpp */,
 				1D2FD76B1496A0AB0084C75C /* Debug.cpp */,
@@ -1552,8 +1544,8 @@
 				1DCA3CFA1494E1DD0089E4AD /* ofxSprite.cpp in Sources */,
 				1DCA3CFB1494E1DD0089E4AD /* ofxSpriteManager.cpp in Sources */,
 				1D01348E1494F447003741F6 /* ofxIniSettings.cpp in Sources */,
-				1D90DD3514966AC100249CF3 /* WaitForStart.cpp in Sources */,
-				1D90DD3714966AFA00249CF3 /* Playing.cpp in Sources */,
+				1D90DD3514966AC100249CF3 /* state_WaitForStart.cpp in Sources */,
+				1D90DD3714966AFA00249CF3 /* state_Playing.cpp in Sources */,
 				1D90DDA41496764600249CF3 /* ofxCvColorImage.cpp in Sources */,
 				1D90DDA51496764600249CF3 /* ofxCvContourFinder.cpp in Sources */,
 				1D90DDA61496764600249CF3 /* ofxCvFloatImage.cpp in Sources */,

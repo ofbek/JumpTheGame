@@ -35,6 +35,7 @@ void testApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
     
     updateState();
+    updateScore();
     
     ni.update();    
     ni.getAllMergedUserPixels(rgb, rgba);
@@ -66,7 +67,6 @@ void testApp::draw() {
     moonfg.draw(0,height-moonfg.getHeight());
     
     drawScore();
-
     drawBorders();
     
     fbo.end();
@@ -97,7 +97,6 @@ void testApp::keyPressed(int key){
     if (key == 'i') showRawVideo = !showRawVideo;
     if (key == 'v') videoScale*=1.025;
     if (key == 'V') videoScale/=1.025;
-    if (key == 'w') showWarpCorners = !showWarpCorners;
     if (key == 'd' || key=='r') showDebug = !showDebug;
 }
 

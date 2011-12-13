@@ -19,9 +19,8 @@ void testApp::loadSettings() {
     showVideoOutline = ini.get("showVideoOutline",false);
     videoPosition = ini.get("video.position",ofPoint());
     startButtonPosition = ini.get("start.position",ofPoint());
-    showWarpCorners = ini.get("showWarpCorners",false);
     showDebug = ini.get("showDebug",false);
-    beginTimeLeft = ini.get("beginTimeLeft",60);
+    beginTimeLeft = ini.get("beginTimeLeft",60.0f);
     beginScore = ini.get("beginScore",0);
     timeBarRect = ini.get("timeBarRect",ofRectangle(0,0,100,10));
     gameOverPosition = ini.get("gameOverPosition",ofPoint());
@@ -30,6 +29,8 @@ void testApp::loadSettings() {
     gameOverVisbibleTime = ini.get("gameOverVisbibleTime",15);
     timePerPoint = ini.get("timePerPoint",5);
     scorePoints = ini.get("scorePoints",10);
+    maxScore = ini.get("maxScore",999);
+    soundEnabled = ini.get("soundEnabled",true);
     
     //box2d
     box.init();

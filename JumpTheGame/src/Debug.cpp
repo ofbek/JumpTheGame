@@ -3,7 +3,7 @@
 void testApp::drawDebug() {
     if (!showDebug) return;
     
-    ofSetColor(0,230);
+    ofSetColor(0,(int)ini.get("debugMaskAlpha",230));
     ofRect(0,0,ofGetWidth(),ofGetHeight());
     
     float x=5;
@@ -14,6 +14,7 @@ void testApp::drawDebug() {
     ofDrawBitmapString("videoScale: " + ofToString(videoScale), x, y+=15);
     ofDrawBitmapString("start button pos: " + ofToString(start.getPosition()), x, y+=15);
     ofDrawBitmapString("start button size: " + ofToString(start.getSize()), x, y+=15);
+    ofDrawBitmapString("beginTimeLeft: " + ofToString(beginTimeLeft), x, y+=15);
     ofDrawBitmapString("timeLeft: " + ofToString(timeLeft), x, y+=15);
     ofDrawBitmapString("score: " + ofToString(score), x, y+=15);
     
@@ -23,12 +24,11 @@ void testApp::drawDebug() {
     ofRotateZ(-90);
     ofScale(aspectRatio,aspectRatio);
     fbo.draw(-ofGetWidth()/2,-ofGetHeight()/2,ofGetWidth(),ofGetHeight());
-    //ofGetWidth()/2-ofGetHeight()*aspectRatio/2,0,ofGetHeight()*aspectRatio,ofGetHeight());
     ofPopMatrix();
 }
 
 void testApp::drawWarpCorners() {
-    if (!showWarpCorners) return;
+    if (!showBorders) return;
     ofSetColor(255, 0, 255);
     ofSetLineWidth(2);
     ofNoFill();
@@ -44,19 +44,19 @@ void testApp::drawWarpCorners() {
 }
 
 void testApp::drawBorders() {
-    if (showBorders) {
-        //border
-        ofNoFill();
-        ofSetColor(255);
-        ofSetLineWidth(5);
-        ofRect(0,0,width,height);
-        //origin
-        ofSetColor(255,0,0);
-        ofSetLineWidth(1);
-        ofFill();
-        ofCircle(0,0,10);
-        //center
-        ofSetColor(0,255,0);
-        ofCircle(center,5);
-    }
+    if (!showBorders) return;
+    //border
+    ofNoFill();
+    ofSetColor(255);
+    ofSetLineWidth(5);
+    ofRect(0,0,width,height);
+    //origin
+    ofSetColor(255,0,0);
+    ofSetLineWidth(1);
+    ofFill();
+    ofCircle(0,0,10);
+    //center
+    ofSetColor(0,255,0);
+    ofCircle(center,5);
+    ofSetColor(255);
 }
