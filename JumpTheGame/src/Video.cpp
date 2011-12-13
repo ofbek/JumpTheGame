@@ -78,9 +78,11 @@ void testApp::drawVideo() {
 }
 
 void testApp::drawUserOutline() {
-    ofPushMatrix();
-    ofSetColor(255);
-    ofSetLineWidth(3);   
-    polyline.draw();
-    ofPopMatrix();
+    if (showUserOutline) {
+        ofPushMatrix();
+        ofSetColor(255);
+        ofSetLineWidth(3);   
+        polyline.draw();
+        ofPopMatrix();
+    }
 }

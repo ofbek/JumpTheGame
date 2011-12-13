@@ -16,7 +16,7 @@ void testApp::loadSettings() {
     showRawVideo = ini.get("showRawVideo",false);
     bgScrollSpeed = ini.get("bgScrollSpeed",-10);
     videoScale = ini.get("video.scale",1.5f);
-    showVideoOutline = ini.get("showVideoOutline",false);
+    //showVideoOutline = ini.get("showVideoOutline",false);
     videoPosition = ini.get("video.position",ofPoint());
     startButtonPosition = ini.get("start.position",ofPoint());
     showDebug = ini.get("showDebug",false);

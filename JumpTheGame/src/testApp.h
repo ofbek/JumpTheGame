@@ -97,7 +97,7 @@ public:
     float aspectRatio;
     bool showBorders;
     bool showUserOutline;
-    bool showVideoOutline;
+    //bool showVideoOutline;
     bool showRawVideo;
     float videoScale;
     bool showDebug;
