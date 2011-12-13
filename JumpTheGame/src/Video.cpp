@@ -24,6 +24,11 @@ void testApp::setupVideo() {
     }
 }
 
+void testApp::updateVideo() {
+    ni.update();    
+    ni.getAllMergedUserPixels(rgb, rgba);
+}
+
 void testApp::drawVideo() {
     ofPushMatrix();
     
@@ -73,11 +78,10 @@ void testApp::drawVideo() {
         //polyline.draw();	
     }
     
+    
     ofPopMatrix();
     ofSetColor(255);
-}
-
-void testApp::drawUserOutline() {
+    
     if (showUserOutline) {
         ofPushMatrix();
         ofSetColor(255);

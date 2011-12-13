@@ -1,16 +1,17 @@
 #include "testApp.h"
 
 void testApp::setupScore() {
-    score = beginScore;
     timeLeft = beginTimeLeft;
+    score = beginScore;
 }
 
 void testApp::updateScore() {
-    if (currentState==PLAYING) {
+    
+    if (getState(PLAYING)) {
         timeLeft -= 1.0/ofGetFrameRate();
     
         if (timeLeft<=0) {
-            nextState = GAME_OVER;
+            setState(GAME_OVER);
         }
     }
 }
@@ -29,4 +30,14 @@ void testApp::drawScore() {
     ofRect(timeBarFrontRect);
     
     ofSetColor(255);
+}
+
+void testApp::increaseScore() {
+    score+=scorePoints;
+    if (score>maxScore) score=maxScore;
+}
+
+void testApp::decreaseScore() {
+    score-=hitMinusPoints;
+    if (score<0) score=0;
 }

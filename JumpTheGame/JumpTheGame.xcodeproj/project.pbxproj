@@ -59,6 +59,9 @@
 		1DCA3CF91494E1DD0089E4AD /* ofxExtras.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA3CF01494E1DD0089E4AD /* ofxExtras.cpp */; };
 		1DCA3CFA1494E1DD0089E4AD /* ofxSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA3CF41494E1DD0089E4AD /* ofxSprite.cpp */; };
 		1DCA3CFB1494E1DD0089E4AD /* ofxSpriteManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DCA3CF61494E1DD0089E4AD /* ofxSpriteManager.cpp */; };
+		1DF0DAC81497985B004E00CB /* state_GameOver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DF0DAC71497985B004E00CB /* state_GameOver.cpp */; };
+		1DF0DACA1497B4B5004E00CB /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DF0DAC91497B4B5004E00CB /* Keyboard.cpp */; };
+		1DF0DACC1497B4F0004E00CB /* Background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1DF0DACB1497B4EF004E00CB /* Background.cpp */; };
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E45BE97B0E8CC7DD009D7055 /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E45BE9710E8CC7DD009D7055 /* AGL.framework */; };
@@ -430,6 +433,9 @@
 		1DCA3CF51494E1DD0089E4AD /* ofxSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSprite.h; sourceTree = "<group>"; };
 		1DCA3CF61494E1DD0089E4AD /* ofxSpriteManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxSpriteManager.cpp; sourceTree = "<group>"; };
 		1DCA3CF71494E1DD0089E4AD /* ofxSpriteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxSpriteManager.h; sourceTree = "<group>"; };
+		1DF0DAC71497985B004E00CB /* state_GameOver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = state_GameOver.cpp; sourceTree = "<group>"; };
+		1DF0DAC91497B4B5004E00CB /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Keyboard.cpp; sourceTree = "<group>"; };
+		1DF0DACB1497B4EF004E00CB /* Background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Background.cpp; sourceTree = "<group>"; };
 		BBAB23BE13894E4700AA2426 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = ../../../libs/glut/lib/osx/GLUT.framework; sourceTree = "<group>"; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E45BE9710E8CC7DD009D7055 /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -1238,8 +1244,11 @@
 				E4B69E1E0A3A1BDC003C02F2 /* testApp.cpp */,
 				1D90DD3414966AC100249CF3 /* state_WaitForStart.cpp */,
 				1D90DD3614966AFA00249CF3 /* state_Playing.cpp */,
+				1DF0DAC71497985B004E00CB /* state_GameOver.cpp */,
 				1D2FD7751496A4AD0084C75C /* Window.cpp */,
 				1D2FD76914969FCB0084C75C /* Mouse.cpp */,
+				1DF0DAC91497B4B5004E00CB /* Keyboard.cpp */,
+				1DF0DACB1497B4EF004E00CB /* Background.cpp */,
 				1D2FD76B1496A0AB0084C75C /* Debug.cpp */,
 				1D2FD76D1496A0E90084C75C /* HitTest.cpp */,
 				1D2FD76F1496A1600084C75C /* Settings.cpp */,
@@ -1604,6 +1613,9 @@
 				F4C0976D1496C5F500D1BCB8 /* ofxBox2dJoint.cpp in Sources */,
 				F4C0976E1496C5F500D1BCB8 /* ofxBox2dPolygon.cpp in Sources */,
 				F4C0976F1496C5F500D1BCB8 /* ofxBox2dRect.cpp in Sources */,
+				1DF0DAC81497985B004E00CB /* state_GameOver.cpp in Sources */,
+				1DF0DACA1497B4B5004E00CB /* Keyboard.cpp in Sources */,
+				1DF0DACC1497B4F0004E00CB /* Background.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1753,7 +1765,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_52)",
-					"\"$(SRCROOT)/../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 					"\"$(SRCROOT)/bin/data/openni/lib\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);
@@ -1841,7 +1852,6 @@
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_49)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_50)",
 					"$(LIBRARY_SEARCH_PATHS_QUOTED_FOR_TARGET_51)",
-					"\"$(SRCROOT)/../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 					"\"$(SRCROOT)/bin/data/openni/lib\"",
 					"\"$(SRCROOT)/../../../addons/ofxOpenCv/libs/opencv/lib/osx\"",
 				);

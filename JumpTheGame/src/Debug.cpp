@@ -3,7 +3,7 @@
 void testApp::drawDebug() {
     if (!showDebug) return;
     
-    ofSetColor(0,(int)ini.get("debugMaskAlpha",230));
+    ofxSetHexColor(debugMaskColor,debugMaskAlpha);
     ofRect(0,0,ofGetWidth(),ofGetHeight());
     
     float x=5;
@@ -12,8 +12,6 @@ void testApp::drawDebug() {
     ofDrawBitmapString("frameRate: " + ofToString(ofGetFrameRate()), x, y+=15);
     ofDrawBitmapString("state: " + ofToString(currentState), x, y+=15);
     ofDrawBitmapString("videoScale: " + ofToString(videoScale), x, y+=15);
-    ofDrawBitmapString("start button pos: " + ofToString(start.getPosition()), x, y+=15);
-    ofDrawBitmapString("start button size: " + ofToString(start.getSize()), x, y+=15);
     ofDrawBitmapString("beginTimeLeft: " + ofToString(beginTimeLeft), x, y+=15);
     ofDrawBitmapString("timeLeft: " + ofToString(timeLeft), x, y+=15);
     ofDrawBitmapString("score: " + ofToString(score), x, y+=15);

@@ -5,44 +5,36 @@ void testApp::setupHitTest() {
     ofAddListener(box.contactEndEvents, this, &testApp::contactEnd);
 }
 
-void testApp::hitStart() {
-    
-    cout << "HIT START" << endl;
-    
-    if (currentState==WAIT_FOR_START) {
-        ofBackground(255,255,0); 
-        
-        cout << "in START" << endl;
-        
-        nextState = INIT_PLAY;
-        
-        if (soundEnabled) sounds["sounds/start.wav"];
-    }
-}
-
 void testApp::hitGood() {
     
-    explosion.setPosition(diamond.getPosition());
-    explosion.play();
+    playGoodExplosion();
+    playSound("good");
     
-    score+=hitMinusPoints;
-    if (score>maxScore) score=maxScore;
+    increaseScore();
     
-    ofBackground(0, 255, 0);
+    createNewGoodItem();
     
-    if (soundEnabled) sounds["sounds/good.wav"].play();    
+    //flash green
+    debugMaskColor = 0x00ff00;
+    
+    //reset flag
+    flagHitGood = false;
 }
 
 void testApp::hitBad() {
-    score-=hitMinusPoints;
-    if (score<0) score=0;
     
-    explosion.setPosition(jet.getPosition());
-    explosion.play();
+    playBadExplosion();
+    playSound("bad");
     
-    ofBackground(255, 0, 0);
+    decreaseScore();
+
+    createNewBadItem();
     
-    if (soundEnabled) sounds["sounds/bad.wav"].play();    
+    //flash red
+    debugMaskColor = 0xff0000;
+
+    //reset flag
+    flagHitBad = false;
 }
 
 
@@ -54,23 +46,27 @@ void testApp::contactStart(ofxBox2dContactArgs &e) {
         
         if (e.a->GetType() == b2Shape::e_polygon || e.b->GetType() == b2Shape::e_polygon) {
         
-            
             ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
             ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
             
-            if ((a==&start || b==&start)) { //&& (e.a->GetBody()==&boxUser || e.b->GetBody()==&boxUser.)) {                
-            
-                cout << "user hit start??? " << e.a->GetBody() << " " << e.b->GetBody() << " " << &start << " " << &boxUser << endl;
+            if ((a==&startButton || b==&startButton)) {
                 
-                 hitStart();
+                if (getState(WAIT_FOR_START)) {
+                    setState(PLAYING);
+                    debugMaskColor = 0xffff00;
+                }
             }
             
             if (a==&jet || b==&jet) {
-                hitBad();               
+                if (getState(PLAYING)) {
+                    flagHitBad = true;               
+                }
             }
             
             if (a==&diamond || b==&diamond) { 
-                hitGood();
+                if (getState(PLAYING)) {
+                    flagHitGood = true;
+                }
             }
             
         }
@@ -81,11 +77,10 @@ void testApp::contactStart(ofxBox2dContactArgs &e) {
 //--------------------------------------------------------------
 void testApp::contactEnd(ofxBox2dContactArgs &e) {
     if(e.a != NULL && e.b != NULL) { 
-        
-        //ofxSprite *a = (ofxSprite*)e.a->GetBody()->GetUserData();
-        //ofxSprite *b = (ofxSprite*)e.b->GetBody()->GetUserData();
-        
-        //ofBackground(0);
-        
+
+        debugMaskColor = 0x000000;
+
     }
 }
+
+

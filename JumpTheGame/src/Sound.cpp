@@ -1,10 +1,5 @@
 #include "testApp.h"
 
-void testApp::loadSounds() {
-    //sound.loadSound("sound/explosion.wav");
-    
-    //no need to preload sounds
-    //just call them by filename like: 
-    //sounds["explosion.wav"].play();
-    
+void testApp::playSound(string name) {
+    sounds[ini.get("sounds."+name,name+".wav")];
 }

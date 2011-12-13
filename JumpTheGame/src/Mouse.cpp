@@ -4,10 +4,10 @@
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button) {
     
-    if (currentState==WAIT_FOR_START) {
-        nextState = INIT_PLAY;
-    }
+    //if GAME_OVER then return to WAIT_FOR_START
+    setState(getState(WAIT_FOR_START) ? PLAYING : WAIT_FOR_START);
     
+    //check for quad warping corners
     for (int i=0; i<4; i++) {
         if (ofDist(x,y,corners[i].x,corners[i].y)<20) {
             currentCorner = &corners[i];

@@ -1,14 +1,5 @@
 #include "testApp.h"
 
-
-void testApp::setupWindow() {
-    //called at the start of every draw function
-    
-    ofTranslate(ofGetWidth()/2,ofGetHeight()/2); //center
-    ofRotateZ(90);  // rotate
-    ofTranslate(-center); //set origin to left top
-}
-
 void testApp::windowResized(int w, int h) {
     //program runs always in portrait mode. width and height are reversed
     

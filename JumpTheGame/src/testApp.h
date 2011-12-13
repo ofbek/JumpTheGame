@@ -13,19 +13,22 @@ public:
     //load
     void loadSettings();
     void loadImages();
-    void loadSounds();
     
     //setup
     void setup();
     void setupHitTest();
     void setupVideo();
     void setupWindow();
-    void setupWaitForStart();
     void setupPlay();
+    void setupScore();
+
+    //update
+    void update();
+    void updateVideo();
+    void updateScore();
     
     //draw
     void draw();
-    void drawUserOutline();
     void drawBackground();
     void drawVideo();
     void drawWaitForStart();
@@ -34,16 +37,20 @@ public:
     void drawBorders();
     void drawWarpCorners();
     void drawScore();
+    void drawStartButton();
     
-    //update
-    void update();
-
-	//hitTest
+    //play
+    void playGoodExplosion();
+    void playBadExplosion();
+    
+  	//hitTest
     void contactStart(ofxBox2dContactArgs &e);
 	void contactEnd(ofxBox2dContactArgs &e);
     void hitGood();
     void hitBad();
-    void hitStart();
+    
+    //sound
+    void playSound(string name);
     
     //mouse & keyboard
     void keyPressed(int key);
@@ -59,12 +66,31 @@ public:
     void windowResized(int x, int y);
     
     //game logic
-    enum State { WAIT_FOR_START, INIT_PLAY, PLAYING, GAME_OVER };
-    State currentState;
-    State nextState;
-    void updateState();
-    void setupScore();
-    void updateScore();
+    void increaseScore();
+    void decreaseScore();
+    void createNewGoodItem();
+    void createNewBadItem();
+
+    //states
+    enum State { WAIT_FOR_START, PLAYING, GAME_OVER };
+    void setState(State state) { nextState=state; };
+    bool getState(State state) { return currentState==state; };
+    State currentState, nextState;
+
+    void state_WaitForStart_begin();
+    void state_WaitForStart_update();
+    void state_WaitForStart_draw();
+    void state_WaitForStart_end();
+
+    void state_Playing_begin();
+    void state_Playing_update();
+    void state_Playing_draw();
+    void state_Playing_end();
+    
+    void state_GameOver_begin();
+    void state_GameOver_update();
+    void state_GameOver_draw();
+    void state_GameOver_end();
     
     //objects
     ofxSimpleOpenNI ni;
@@ -77,9 +103,9 @@ public:
     ofxBox2dCircle boxDiamond;
     ofxIniSettings ini;
     ofPolyline polyline;
-    ofxSprite bg,explosion,jet,moonbg,moonfg,start;
+    ofxSprite bg,explosion,jet,moonbg,moonfg,startButton;
     ofxSprite diamond,donut,kleurexplosie,infographic;
-    ofxSprite cijfers;
+    ofxSprite cijfers,gameover;
     ofxSpriteManager sprites;
     ofxSoundAssets sounds;
     ofPoint videoPosition;
@@ -90,6 +116,8 @@ public:
     ofPoint *currentCorner;
     ofRectangle timeBarRect;
     ofPoint gameOverPosition;
+    ofPoint jetStartPosition;
+    ofPoint jetAttractorPosition;
 
     //variables
     float bgScrollPos;
@@ -97,7 +125,6 @@ public:
     float aspectRatio;
     bool showBorders;
     bool showUserOutline;
-    //bool showVideoOutline;
     bool showRawVideo;
     float videoScale;
     bool showDebug;
@@ -108,9 +135,14 @@ public:
     float hitMinusPoints;
     float scorePoints;
     float timePerPoint;
-    float gameOverVisbibleTime;
     float maxScore;
     bool soundEnabled;
+    int debugMaskColor;
+    int debugMaskAlpha;
+    bool flagHitGood;
+    bool flagHitBad;
+    float jetAttractorAmount;
+    float jetRadius;
     
     //kinect resolution
     static const int w = 640;
